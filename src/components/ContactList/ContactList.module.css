@@ -1,0 +1,26 @@
+.contact-item {
+    font-size: 20px;
+  }
+  
+  .contact-item:not(:last-child) {
+    margin-bottom: 12px;
+  }
+  
+  .delete-button {
+    width: 70px;
+    margin-left: 10px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border-radius: 5px;
+    border-color: #ccc;
+  }
+  
+  .delete-button:hover {
+    background-color: rgb(107, 207, 235);
+    color: white;
+  }
+  
+  .delete-button:active {
+    background-color: blue;
+    color: white;
+  }
+  

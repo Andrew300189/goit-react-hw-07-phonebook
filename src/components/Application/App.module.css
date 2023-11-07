@@ -1,0 +1,47 @@
+.container {
+    display: flex;
+    max-width: 400px;
+    padding: 20px;
+    border: 1px solid #3e3232;
+    border-radius: 5px;
+    font-size: 20px;
+  }
+  
+  .container input[type="text"],
+  .container input[type="tel"] {
+    display: block;
+    margin: 10px 0;
+    width: 100%;
+    padding: 5px;
+    border-radius: 3px;
+    border-color: #ccc;
+  }
+  
+  .container button {
+    width: 100px;
+    padding: 2px;
+    background-color: #fff;
+    border-radius: 5px;
+    border-color: #ccc;
+    cursor: pointer;
+    font-family: 'Courier New', Courier, monospace;
+  }
+  
+  .form-button:hover,
+  .delete-button:hover {
+    background-color: rgb(107, 207, 235);
+    color: white;
+  }
+  
+  .form-button:active,
+  .delete-button:active {
+    background-color: blue;
+    color: white;
+  }
+  
+  .form-input {
+    padding: 5px;
+    border-radius: 3px;
+    border-color: #ccc;
+  }
+  

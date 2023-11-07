@@ -1,7 +1,7 @@
-@import-normalize; /* bring in normalize.css styles */
+@import-normalize;
 
 body {
-  margin: 0;
+  margin-left: 100px;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -12,4 +12,67 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.container {
+  display: flex;
+  max-width: 400px;
+  padding: 20px;
+  border: 1px solid #3e3232;
+  border-radius: 5px;
+  font-size: 20px;
+}
+
+.container input[type="text"],
+.container input[type="tel"]
+ {
+  display: block; 
+  margin: 10px 0;
+  width: 100%;
+  padding: 5px;
+  border-radius: 3px;
+  border-color: #ccc;
+}
+
+.container button {
+width: 100px;
+padding: 2px;
+background-color: #fff;
+border-radius: 5px;
+border-color: #ccc;
+cursor: pointer;
+font-family:'Courier New', Courier, monospace ;
+}
+
+.delete-button{
+  width: 70px;
+  margin-left: 10px;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  border-radius: 5px;
+  border-color: #ccc;
+  cursor: pointer;
+}
+
+.form-button:hover, .delete-button:hover {
+  background-color: rgb(107, 207, 235);
+  color: white;
+}
+
+.form-button:active, .delete-button:active{
+  background-color: blue;
+  color: white;
+}
+
+.form-input{
+  padding: 5px;
+  border-radius: 3px;
+  border-color: #ccc;
+}
+
+.contact-item{
+font-size: 20px;
+}
+
+.contact-item:not(:last-child) {
+  margin-bottom: 12px;
 }
