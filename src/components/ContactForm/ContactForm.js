@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addContact } from '../../redux/contactsSlice';
-import { nanoid } from 'nanoid';
 
 function ContactForm() {
   const dispatch = useDispatch();
@@ -10,28 +9,13 @@ function ContactForm() {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
-  const handleNameChange = (e) => {
-    setName(e.target.value);
-    checkContactExistence(e.target.value, number);
-  };
-
-  const handleNumberChange = (e) => {
-    setNumber(e.target.value);
-    checkContactExistence(name, e.target.value);
-  };
-
-  const checkContactExistence = (name, number) => {
-    const isContactExists = contacts.some(
-      (contact) => contact.name === name && contact.number === number
-    );
-
-    if (isContactExists) {
-      alert(`${name} with number ${number} is already in contacts.`);
-    }
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (!contacts || !Array.isArray(contacts)) {
+      alert('No contacts available');
+      return;
+    }
 
     if (name.trim() === '' || number.trim() === '') {
       alert('Name and number cannot be empty');
@@ -47,10 +31,16 @@ function ContactForm() {
       return;
     }
 
-    dispatch(addContact({ id: nanoid(), name, number }));
-
-    setName('');
-    setNumber('');
+    dispatch(addContact({ name, number }))
+      .unwrap()
+      .then(() => {
+        alert('Contact added successfully!');
+        setName('');
+        setNumber('');
+      })
+      .catch((error) => {
+        alert('Failed to add contact: ' + error.message);
+      });
   };
 
   return (
@@ -64,7 +54,7 @@ function ContactForm() {
           id="name"
           name="name"
           value={name}
-          onChange={handleNameChange}
+          onChange={(e) => setName(e.target.value)}
           className="form-input"
         />
         <label htmlFor="number" className="form-label">
@@ -75,7 +65,7 @@ function ContactForm() {
           id="number"
           name="number"
           value={number}
-          onChange={handleNumberChange}
+          onChange={(e) => setNumber(e.target.value)}
           className="form-input"
         />
         <button type="submit" className="form-button">

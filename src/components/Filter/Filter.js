@@ -11,12 +11,14 @@ function Filter() {
   };
 
   return (
-    <input
-      type="text"
-      className="form-input"
-      value={filter}
-      onChange={handleFilterChange}
-    />
+    <div>
+      <input
+        type="text"
+        className="form-input"
+        value={filter}
+        onChange={handleFilterChange}
+      />
+    </div>
   );
 }
 

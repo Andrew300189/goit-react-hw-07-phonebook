@@ -1,21 +1,19 @@
-import { configureStore, combineReducers } from '@reduxjs/toolkit';
-import { persistStore, persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
-import { contactsReducer } from './contactsSlice';
+import { configureStore } from '@reduxjs/toolkit';
+import contactsReducer from './contactsSlice';
 
-const persistConfig = {
-  key: 'root',
-  storage,
+const customMiddleware = (store) => (next) => (action) => {
+  console.log('Action:', action);
+  const result = next(action);
+  console.log('State after dispatch:', store.getState());
+
+  return result;
 };
 
-const rootReducer = combineReducers({
-  contacts: contactsReducer,
+const store = configureStore({
+  reducer: {
+    contacts: contactsReducer,
+  },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(customMiddleware),
 });
 
-const persistedReducer = persistReducer(persistConfig, rootReducer);
-
-export const store = configureStore({
-  reducer: persistedReducer,
-});
-
-export const persistor = persistStore(store);
+export default store;
