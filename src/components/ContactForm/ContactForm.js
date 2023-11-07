@@ -12,11 +12,6 @@ function ContactForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!contacts || !Array.isArray(contacts)) {
-      alert('No contacts available');
-      return;
-    }
-
     if (name.trim() === '' || number.trim() === '') {
       alert('Name and number cannot be empty');
       return;
