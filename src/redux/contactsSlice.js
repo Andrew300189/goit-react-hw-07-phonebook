@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-const API = 'https://653e5e66f52310ee6a9ae353.mockapi.io/contacts';
+const BASE_URL = 'https://653e5e66f52310ee6a9ae353.mockapi.io/contacts';
 
 const initialState = {
   contacts: {
