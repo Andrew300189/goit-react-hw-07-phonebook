@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 const BASE_URL = 'https://653e5e66f52310ee6a9ae353.mockapi.io';
-const CONTACTS_ENDPOINT = '/contacts';
 
 const initialState = {
     items: [],
