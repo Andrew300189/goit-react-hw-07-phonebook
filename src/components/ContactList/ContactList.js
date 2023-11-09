@@ -1,28 +1,24 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteContact, fetchContacts } from '../../redux/contactsSlice';
-import { selectContacts, selectState } from 'redux/selectors';
+import { selectContacts, selectFilter } from 'redux/selectors';
 
 function ContactList() {
   const dispatch = useDispatch();
-  const contacts = useSelector((state) => selectContacts(state)) || [];
-  const filter = useSelector((state) => selectState(state));
+  const contacts = useSelector(selectContacts);
+  const filter = useSelector(selectFilter);
 
   useEffect(() => {
     dispatch(fetchContacts());
   }, [dispatch]);
 
-  const filteredContacts = filter
-    ? contacts.filter((contact) =>
+  const filteredContacts = contacts.filter((contact) =>
         contact.name.toLowerCase().includes(filter.toLowerCase())
-      )
-    : contacts;
+      );
 
   const handleDeleteContact = (id) => {
     dispatch(deleteContact(id))
-      .then(() => {
-        dispatch(fetchContacts()); 
-      })
+      .unwrap()
       .catch((error) => {
         alert('Failed to delete contact: ' + error.message);
       });

@@ -1,3 +1,3 @@
 
 export const selectContacts = (state) => state.contacts.items;
-export const selectState = (state) => state.contacts.filter;
+export const selectFilter = (state) => state.contacts.filter;

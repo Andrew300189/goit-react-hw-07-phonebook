@@ -1,19 +1,18 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-const BASE_URL = 'https://653e5e66f52310ee6a9ae353.mockapi.io/contacts';
+const BASE_URL = 'https://653e5e66f52310ee6a9ae353.mockapi.io';
+const CONTACTS_ENDPOINT = '/contacts';
 
 const initialState = {
-  contacts: {
     items: [],
+    filter: '',
     isLoading: false,
     error: null,
-  },
-  filter: "",
 };
 
 export const fetchContacts = createAsyncThunk('contacts/fetchAll', async () => {
   try {
-    const response = await fetch(API);
+    const response = await fetch(`${BASE_URL}/contacts`);
     if (!response.ok) {
       throw new Error('Failed to fetch contacts');
     }
@@ -26,7 +25,7 @@ export const fetchContacts = createAsyncThunk('contacts/fetchAll', async () => {
 
 export const addContact = createAsyncThunk('contacts/addContact', async (contact) => {
   try {
-    const response = await fetch(API, {
+    const response = await fetch(`${BASE_URL}/contacts`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -45,7 +44,7 @@ export const addContact = createAsyncThunk('contacts/addContact', async (contact
 
 export const deleteContact = createAsyncThunk('contacts/deleteContact', async (id) => {
   try {
-    const response = await fetch(`${API}${id}`, {
+    const response = await fetch(`${BASE_URL}/contacts/${id}`, {
       method: 'DELETE',
     });
     if (!response.ok) {
@@ -79,13 +78,31 @@ const contactsSlice = createSlice({
         state.contacts.isLoading = false;
         state.contacts.error = action.error.message;
       })
+      .addCase(addContact.pending, (state) => {
+        state.contacts.isLoading = true;
+        state.contacts.error = null;
+      })
       .addCase(addContact.fulfilled, (state, action) => {
+        state.contacts.isLoading = false;
         state.contacts.items.push(action.payload);
       })
+      .addCase(addContact.rejected, (state, action) => {
+        state.contacts.isLoading = false;
+        state.contacts.error = action.error.message;
+      })
+      .addCase(deleteContact.pending, (state) => {
+        state.contacts.isLoading = true;
+        state.contacts.error = null;
+      })
       .addCase(deleteContact.fulfilled, (state, action) => {
+        state.contacts.isLoading = false;
         state.contacts.items = state.contacts.items.filter(
           (contact) => contact.id !== action.payload
         );
+      })
+      .addCase(deleteContact.rejected, (state, action) => {
+        state.contacts.isLoading = false;
+        state.contacts.error = action.error.message;
       });
   },
 });
