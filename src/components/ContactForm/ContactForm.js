@@ -35,7 +35,7 @@ function ContactForm() {
         setNumber('');
       })
       .catch((error) => {
-        alert('Failed to add contact: ' + error.message);
+        alert(error.message);
       });
   };
 
