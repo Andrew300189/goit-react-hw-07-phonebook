@@ -20,7 +20,7 @@ function ContactList() {
     dispatch(deleteContact(id))
       .unwrap()
       .catch((error) => {
-        alert('Failed to delete contact: ' + error.message);
+        alert(error.message);
       });
   };
 
